@@ -1,0 +1,25 @@
+# Netlify Configuration for Security Headers
+# These headers are applied when deployed to Netlify
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent Clickjacking
+    X-Frame-Options = "DENY"
+    
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Enable XSS protection in older browsers
+    X-XSS-Protection = "1; mode=block"
+    
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (Strict)
+    # Note: 'unsafe-inline' is often needed for styled-components or similar libraries.
+    # Adjust as necessary for production.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' https://images.unsplash.com data:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+    
+    # Permissions Policy (formerly Feature Policy) - Limit access to sensitive features
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
